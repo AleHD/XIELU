@@ -102,8 +102,8 @@ __device__ __forceinline__ scalar_t compute(scalar_t v,
 
   return to_float_if_needed(v) > scalar_t(0.0)
              ? v * (s_alpha_p * v + beta)
-             : (beta + s_alpha_n) * compute_expm1<scalar_t>(min(v, eps)) -
-                   s_alpha_n * v;
+             : s_alpha_n * compute_expm1<scalar_t>(min(v, eps)) -
+                   (beta + s_alpha_n) * v;
 }
 
 template <typename scalar_t, typename vector_t>
